@@ -1,27 +1,49 @@
+// ietextil.go
 package main
 
 import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
+	"sort"
 
 	"github.com/xplshn/ietext/pkg/common"
 )
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
-	var buffer strings.Builder
+	lines := make(map[int]string)
+	var lastNumber int
+	var lastLine string
+	hasLastLine := false
+
 	for scanner.Scan() {
 		line := scanner.Text()
-		_, text, err := common.ParseLine(line)
+		number, text, err := common.ParseLine(line)
 		if err != nil {
-			// If there's an error, just add the original line (without number) to the buffer.
-			// This will ensure that lines without numbers are still included.
-			buffer.WriteString(line + "\n")
+			if hasLastLine {
+				// Append this line to the last numbered line
+				lines[lastNumber] = lastLine + " " + line
+				lastLine = lines[lastNumber]
+			}
 			continue
 		}
-		buffer.WriteString(text + "\n")
+		// Store the line, overriding any existing line with the same number
+		lines[number] = text
+		lastNumber = number
+		lastLine = text
+		hasLastLine = true
 	}
-	fmt.Print(buffer.String())
+
+	// Collect and sort the line numbers
+	keys := make([]int, 0, len(lines))
+	for key := range lines {
+		keys = append(keys, key)
+	}
+	sort.Ints(keys)
+
+	// Print the lines in the sorted order of their numbers
+	for _, key := range keys {
+		fmt.Println(lines[key])
+	}
 }

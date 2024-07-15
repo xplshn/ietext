@@ -1,5 +1,14 @@
 #!/bin/sh
 
+OPWD="$PWD"
+BASE="$(dirname "$(realpath "$0")")"
+if [ "$OPWD" != "$BASE" ]; then
+    echo "... $BASE is not the same as $PWD ..."
+    echo "Going into $BASE and coming back here in a bit"
+    cd "$BASE" || exit 1
+fi
+trap 'cd "$OPWD"' EXIT
+
 # Function to build each command in the cmds directory
 build_commands() {
     for dir in ./cmds/*; do
