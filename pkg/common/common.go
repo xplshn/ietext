@@ -8,7 +8,7 @@ import (
 
 // ParseLine attempts to parse a line into a line number and text.
 func ParseLine(line string) (int, string, error) {
-	if !isValidLine(line) {
+	if !IsValidLine(line) {
 		return 0, "", errors.New("invalid line format")
 	}
 
@@ -27,7 +27,7 @@ func IsValidLine(line string) bool {
 	return true
 }
 
-func ExtractLineNumberAndText(line string) (int, string) {
+func extractLineNumberAndText(line string) (int, string) {
 	numberStr := line[:2]
 	number, _ := strconv.Atoi(numberStr)
 	text := strings.TrimSpace(line[2:])
