@@ -16,7 +16,7 @@ func ParseLine(line string) (int, string, error) {
 	return number, text, nil
 }
 
-func isValidLine(line string) bool {
+func IsValidLine(line string) bool {
 	if len(line) < 3 {
 		return false
 	}
@@ -27,7 +27,7 @@ func isValidLine(line string) bool {
 	return true
 }
 
-func extractLineNumberAndText(line string) (int, string) {
+func ExtractLineNumberAndText(line string) (int, string) {
 	numberStr := line[:2]
 	number, _ := strconv.Atoi(numberStr)
 	text := strings.TrimSpace(line[2:])
