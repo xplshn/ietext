@@ -6,7 +6,7 @@ import (
 	"os"
 	"sort"
 
-	"../pkg/common"
+	"github.com/xplshn/ietext/pkg/common"
 )
 
 type Line struct {
@@ -19,7 +19,7 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		line := scanner.Text()
-		number, text, err := lib.ParseLine(line)
+		number, text, err := common.ParseLine(line)
 		if err != nil {
 			fmt.Println(err)
 			continue

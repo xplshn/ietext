@@ -3,9 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/xplshn/ietext/pkg/common"
 	"os"
 	"strings"
+
+	"github.com/xplshn/ietext/pkg/common"
 )
 
 func main() {
