@@ -41,8 +41,9 @@ func main() {
 	})
 
 	for _, line := range lines {
-		if common.IsValidLine(fmt.Sprintf("%02d %s\n", line.Number, line.Text)) {
-			fmt.Printf("%02d %s\n", line.Number, line.Text)
+		mLine := fmt.Sprintf("%02d %s\n", line.Number, line.Text)
+		if common.IsValidLine(mLine) {
+			fmt.Print(mLine)
 		}
 	}
 }
