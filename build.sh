@@ -14,7 +14,7 @@ build_commands() {
 copy_executables() {
     mkdir -p ./built
     find ./cmds -type f -executable | while read -r executable; do
-        cp "$executable" ./built/
+        mv "$executable" ./built/
     done
 }
 
