@@ -1,22 +1,35 @@
 package common
 
 import (
-	"fmt"
+	"errors"
 	"strconv"
 	"strings"
 )
 
-// ParseLine extracts the line number and text from a given line.
+// ParseLine attempts to parse a line into a line number and text.
 func ParseLine(line string) (int, string, error) {
-	parts := strings.SplitN(line, " ", 2)
-	if len(parts) < 2 {
-		return 0, "", fmt.Errorf("invalid line format")
+	if !isValidLine(line) {
+		return 0, "", errors.New("invalid line format")
 	}
 
-	number, err := strconv.Atoi(parts[0])
-	if err != nil || number < 0 {
-		return 0, "", fmt.Errorf("invalid line number")
-	}
+	number, text := extractLineNumberAndText(line)
+	return number, text, nil
+}
 
-	return number, strings.TrimSpace(parts[1]), nil
+func isValidLine(line string) bool {
+	if len(line) < 3 {
+		return false
+	}
+	lineNumberStr := line[:2]
+	if _, err := strconv.Atoi(lineNumberStr); err != nil {
+		return false
+	}
+	return true
+}
+
+func extractLineNumberAndText(line string) (int, string) {
+	numberStr := line[:2]
+	number, _ := strconv.Atoi(numberStr)
+	text := strings.TrimSpace(line[2:])
+	return number, text
 }

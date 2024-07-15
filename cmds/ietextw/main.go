@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/rivo/tview"
 )
@@ -31,6 +32,16 @@ func main() {
 		content, err := ioutil.ReadFile(filePath)
 		if err == nil {
 			textArea.SetText(string(content), false)
+		} else {
+			fmt.Println("Error reading file:", err)
+		}
+	} else {
+		// Read from STDIN
+		stat, _ := os.Stdin.Stat()
+		if (stat.Mode() & os.ModeCharDevice) == 0 {
+			// Data is being piped to stdin
+			inputBytes, _ := ioutil.ReadAll(os.Stdin)
+			textArea.SetText(strings.TrimSpace(string(inputBytes)), false)
 		}
 	}
 
@@ -50,7 +61,7 @@ func main() {
 		}
 	}
 	// Handle events
-	textArea.SetMovedFunc(updateInfos)
+	textArea.SetChangedFunc(updateInfos)
 	updateInfos()
 
 	app.SetRoot(pages, true).EnableMouse(true)
