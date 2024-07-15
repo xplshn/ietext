@@ -16,7 +16,9 @@ func main() {
 		line := scanner.Text()
 		_, text, err := common.ParseLine(line)
 		if err != nil {
-			fmt.Println(err)
+			// If there's an error, just add the original line (without number) to the buffer.
+			// This will ensure that lines without numbers are still included.
+			buffer.WriteString(line + "\n")
 			continue
 		}
 		buffer.WriteString(text + "\n")
