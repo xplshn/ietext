@@ -11,3 +11,8 @@ You can basically override lines by specifiying their line numbers. Same way an 
 > [!IMPORTANT]
 > Currently, whitespace is destroyed by ietextw's output :(
 > I haven't had the time to correct the issue/bug. And given that this serves no purpose. I probably won't be fixing it any time soon
+
+
+> [!NOTE]
+> I've been working on adding syntax highlight to the `Ed` (the Standard Unix Text EDitor) implementation made by [u-root](https://github.com/u-root/u-root). Which can be found here: https://github.com/u-root/u-root/tree/main/cmds/exp/ed
+> This is probably more useful. And if I get it working I'll replace ietextw with an enhanced `Ed`
