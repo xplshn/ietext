@@ -9,9 +9,8 @@ You can basically override lines by specifiying their line numbers. Same way an 
 ![2024-07-18-163051_1366x768_scrot](https://github.com/user-attachments/assets/7bd85be3-c56a-4859-ba63-94c998802cbd)
 
 > [!IMPORTANT]
-> Currently, whitespace is destroyed by ietextw's output :(
-> I haven't had the time to correct the issue/bug. And given that this serves no purpose. I probably won't be fixing it any time soon
-
+> Currently, whitespace is destroyed by ietextil's output :(
+> I haven't had the time to correct the issue/bug. And given that this serves no purpose. I probably won't be fixing it any time soon, since this is only a proof of concept.
 
 > [!NOTE]
 > I've been working on adding syntax highlight to the `Ed` (the Standard Unix Text EDitor) implementation made by [u-root](https://github.com/u-root/u-root). Which can be found here: https://github.com/u-root/u-root/tree/main/cmds/exp/ed
